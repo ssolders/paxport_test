@@ -1,0 +1,96 @@
+<html>
+
+<head>
+<title>Paxport ui-test</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="style/style.css">
+
+</head>
+
+<body>
+
+<div class="applicationContainer" ng-app="myApp" ng-controller="myCtrl">
+	<div class="topPane">
+		<div class="topPaneTitle">Paxport Test</div>
+		
+		<div id="sucessAlert">Payment done</div>
+
+		<div class="topPaneCartOuter">
+			<div onclick="displayCart()" class="topPaneCart"></div>
+			<div class="topPaneCart_costIndicator borderRadius" ng-class="{topPaneCart_costIndicator_active: currentCost != 0}">{{ currentCost }} kr</div>
+			<div id="topPane_basket">
+				<div ng-repeat="seat in planeSeatData | filter:{ selected: true }" class="topPane_basket_item">
+					Seat number: {{ seat.seatNo }} <br/>
+					Seat cost: {{ seat.cost }} kr
+				</div>
+				
+				<div ng-click="resetAll()" class="checkoutBasket">Checkout</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="upperInfoContiner">
+	
+		<div class="infoTextContainer borderRadius">
+			<div class="infoTextContainer_inner">
+			 <p>In X days you will be automatically seated and checked in, but you still have time to choose your seat</p>
+			</div>
+		</div>
+		
+		<div class="legend_priceInfo borderRadius">
+			<div class="legend_priceInfo_inner">
+				<div class="legendPriceItem firstClassItem">
+					<div class="priceColor"></div>
+					<div>First class</div>
+					<div class="clearFix"></div>
+					<div class="priceItem_price">Cost: 100kr</div>
+				</div>
+				
+				<div class="legendPriceItem secondClassItem">
+					<div class="priceColor"></div>
+					<div>Second class</div>
+					<div class="clearFix"></div>
+					<div class="priceItem_price">Cost: 200kr</div>
+				</div>
+				
+				<div class="legendPriceItem thirdClassItem">
+					<div class="priceColor"></div>
+					<div>Third class</div>
+					<div class="clearFix"></div>
+					<div class="priceItem_price">Cost: 400kr</div>
+				</div>
+			
+			</div>
+		</div>
+		<div class="clearFix"></div>
+	</div>
+		
+		
+	<div class="airPlaneContainer">
+		
+		<div class="airplane_class airPlane_thirdClass">
+			<div onclick="toggleActive(this)" ng-click="updateSeatReservation(seat.cost, seat.seatNo)" ng-repeat="seat in planeSeatData | filter:{ cost: 100 }" class="airPlaneSeat borderRadius left">{{ seat.seatNo }}</div>
+		</div>
+
+		<div class="airplane_class airPlane_secondClass">
+			<div onclick="toggleActive(this)" ng-click="updateSeatReservation(seat.cost, seat.seatNo)" ng-repeat="seat in planeSeatData | filter:{ cost: 200 }" class="airPlaneSeat borderRadius left">{{ seat.seatNo }}</div>
+		</div>
+
+		<div class="airplane_class airPlane_firstClass">
+			<div onclick="toggleActive(this)" ng-click="updateSeatReservation(seat.cost, seat.seatNo)" ng-repeat="seat in planeSeatData | filter:{ cost: 400 }" class="airPlaneSeat borderRadius left">{{ seat.seatNo }}</div>
+		</div>
+	</div>
+	
+	
+	<div class="clearFix"></div>
+</div>
+
+<script src="scripts/helperFunctions.js"></script>
+<script src="scripts/scripts.js"></script>
+</body>
+</html>
